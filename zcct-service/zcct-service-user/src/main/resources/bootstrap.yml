@@ -1,0 +1,23 @@
+# Tomcat
+server:
+  port: 9001
+
+# Spring
+spring:
+  application:
+    name: zcct-service-user
+  profiles:
+    active: dev
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+        namespace: zcctframe
+        group: zcct
+      config:
+        server-addr: 127.0.0.1:8848
+        file-extension: yml
+        namespace: zcctframe
+        group: zcct
+        shared-configs:
+          - application-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}
