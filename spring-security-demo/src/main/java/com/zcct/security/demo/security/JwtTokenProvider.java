@@ -89,7 +89,7 @@ public class JwtTokenProvider {
      * @param token
      */
     public void parseJwt(String token) {
-        if (StringUtils.hasText(token) && token.startsWith("Brear ")) {
+        if (StringUtils.hasText(token) && token.startsWith("Bearer ")) {
             // 去掉令牌前缀
             token = token.replace("Bearer ", "");
         } else {

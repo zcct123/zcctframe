@@ -53,7 +53,7 @@ public class UserLoginServiceImpl implements UserLoginService {
         String jwtToken = jwtTokenProvider.createToken(String.valueOf(userId),jwtUser);
 
         Map<String, Object> authInfo = new HashMap<String, Object>(2) {{
-            put("token", "Brear " + jwtToken);
+            put("token", "Bearer " + jwtToken);
             put("user", userId);
         }};
 
