@@ -1,8 +1,7 @@
 package com.zcct.security.demo.rest;
 
-import com.zcct.common.base.domain.R;
-import com.zcct.security.demo.domain.User;
 import com.zcct.security.demo.service.UserService;
+import com.zcct.common.domain.R;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.web.FilterChainProxy;
 import org.springframework.web.bind.annotation.*;

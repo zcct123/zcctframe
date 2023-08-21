@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>zcctframe</artifactId>
-        <groupId>com.zcct</groupId>
+        <groupId>org.zcct</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
@@ -44,28 +44,17 @@
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
 
-        <!-- SpringBoot security -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-security</artifactId>
-        </dependency>
-
-        <!-- Spspring-cloud oauth2 -->
-<!--        <dependency>-->
-<!--            <groupId>org.springframework.cloud</groupId>-->
-<!--            <artifactId>spring-cloud-starter-oauth2</artifactId>-->
-<!--            <version>2020.0.2</version>-->
-<!--        </dependency>-->
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-
         <!-- common-redis -->
         <dependency>
-            <groupId>com.zcct</groupId>
+            <groupId>org.zcct</groupId>
             <artifactId>zcct-common-redis</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
+        <!-- common-security -->
+        <dependency>
+            <groupId>org.zcct</groupId>
+            <artifactId>zcct-common-web</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
 

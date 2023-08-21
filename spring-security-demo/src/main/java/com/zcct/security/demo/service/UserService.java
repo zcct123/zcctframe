@@ -1,6 +1,6 @@
 package com.zcct.security.demo.service;
 
-import com.zcct.common.base.domain.R;
+
 import com.zcct.security.demo.domain.User;
 import com.baomidou.mybatisplus.extension.service.IService;
 

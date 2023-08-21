@@ -1,8 +1,7 @@
 package com.zcct.security.demo.exception;
 
-import com.zcct.common.base.domain.R;
+import com.zcct.common.domain.R;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;

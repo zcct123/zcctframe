@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>zcctframe</artifactId>
-        <groupId>com.zcct</groupId>
+        <groupId>org.zcct</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
@@ -12,7 +12,7 @@
     <artifactId>zcct-service-api</artifactId>
     <description>zcct-service 服务API</description>
     <modules>
-        <module>zcct-service-user-api</module>
+        <module>zcct-service-system-api</module>
     </modules>
     <packaging>pom</packaging>
 

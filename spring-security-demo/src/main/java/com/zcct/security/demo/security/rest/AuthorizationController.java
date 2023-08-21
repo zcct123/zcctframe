@@ -1,14 +1,12 @@
 package com.zcct.security.demo.security.rest;
 
-import com.zcct.common.base.domain.R;
-import com.zcct.common.redis.service.RedisUtil;
 import com.zcct.security.demo.security.entity.LoginUser;
 import com.zcct.security.demo.security.service.UserLoginService;
+import com.zcct.common.domain.R;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 

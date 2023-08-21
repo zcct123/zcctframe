@@ -1,13 +1,11 @@
 package com.zcct.security.demo.security.rest;
 
-import com.zcct.common.base.domain.R;
 import com.zcct.security.demo.security.annotation.RequireAnonymous;
 import com.zcct.security.demo.security.annotation.RequireRules;
 import com.zcct.security.demo.security.annotation.RequiresLogin;
 import com.zcct.security.demo.security.annotation.RequiresPermissions;
-import io.swagger.annotations.ApiOperation;
+import com.zcct.common.domain.R;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
