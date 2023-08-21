@@ -25,7 +25,7 @@ public class UserController {
     public R<Object> queryById(@PathVariable Long id){
 
         new FilterChainProxy();
-        return R.ok( userService.queryById(id));
+        return null;
     }
 
 }

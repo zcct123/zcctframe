@@ -22,24 +22,24 @@ public class TestController {
     @GetMapping(value = "/login")
     @RequiresLogin
     public R<Object> login() throws Exception {
-        return R.ok("访问成功");
+        return null;
     }
 
     @GetMapping(value = "/rules")
     @RequireRules("admin")
     public R<Object> rules() throws Exception {
-        return R.ok("访问成功");
+        return null;
     }
 
     @GetMapping(value = "/permissions")
     @RequiresPermissions("user:list")
     public R<Object> permissions() throws Exception {
-        return R.ok("访问成功");
+        return null;
     }
 
     @GetMapping(value = "/anonymous")
     @RequireAnonymous
     public R<Object> anonymous() throws Exception {
-        return R.ok("访问成功");
+        return null;
     }
 }

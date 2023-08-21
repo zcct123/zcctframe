@@ -30,19 +30,22 @@ public class AuthorizationController {
     @ApiOperation("登录授权")
     @PostMapping(value = "/login")
     public R<Object> login(@Validated @RequestBody LoginUser loginUser, HttpServletRequest request) throws Exception {
-        return R.ok(userLoginService.login(loginUser));
+//        return R.ok(userLoginService.login(loginUser));
+        return null;
     }
 
     @ApiOperation("获取用户信息")
     @GetMapping(value = "/getInfo")
     public R<Object> getInfo() throws Exception {
-        return R.ok(userLoginService.getInfo());
+        //return R.ok(userLoginService.getInfo());
+        return null;
     }
 
     @ApiOperation("推出登录")
     @PostMapping(value = "/logout")
     public R<Object> logout() throws Exception {
         userLoginService.logout();
-        return R.ok("退出登录成功");
+      //  return R.ok("退出登录成功");
+        return null;
     }
 }

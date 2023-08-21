@@ -26,6 +26,7 @@ public class RequestExceptionHandler {
     }
 
     R<Object> buildErrorResponse(BadRequestException e) {
-        return R.fail(e.getStatus(),e.getMessage());
+
+        return null;
     }
 }

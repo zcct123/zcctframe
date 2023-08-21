@@ -1,7 +1,5 @@
 package com.zcct.common.domain;
 
-
-import com.zcct.common.domain.e
 import java.io.Serializable;
 
 /**
