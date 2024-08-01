@@ -1,6 +1,6 @@
 package com.zcct.common.web.security.user;
 
-import com.zcct.service.user.api.feign.IUserService;
+//import com.zcct.service.user.api.feign.IUserService;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -18,8 +18,8 @@ import javax.annotation.Resource;
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 
-    @Resource
-    IUserService iUserService;
+//    @Resource
+//    IUserService iUserService;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

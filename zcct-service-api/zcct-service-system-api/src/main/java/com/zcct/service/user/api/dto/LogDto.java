@@ -39,6 +39,9 @@ public class LogDto {
     /** 请求ip */
     private String requestIp;
 
+    /** 请求url */
+    private String requestUrl;
+
     /** 请求耗时 */
     private Long time;
 

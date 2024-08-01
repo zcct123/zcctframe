@@ -1,21 +1,27 @@
 package com.zcct.common.web.log.aspect;
 
+import com.alibaba.fastjson.JSON;
 import com.zcct.common.web.log.annotation.Log;
+import com.zcct.common.web.utils.IpUtils;
+import com.zcct.service.user.api.dto.LogDto;
+import jakarta.servlet.http.HttpServletRequest;
+import org.apache.commons.lang.StringUtils;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
+import org.aspectj.lang.reflect.MethodSignature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.NamedThreadLocal;
-import org.springframework.http.HttpMethod;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.util.Collection;
-import java.util.Map;
+import java.lang.reflect.Method;
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
 
 /**
  * @author zhaochong
@@ -51,7 +57,7 @@ public class LogAspect {
         Object result;
         TIME_THREADLOCAL.set(System.currentTimeMillis());
         result = joinPoint.proceed();
-        handleArointLog();
+        handlelogAround(joinPoint,result);
 
         return result;
     }
@@ -62,12 +68,54 @@ public class LogAspect {
      */
     @AfterThrowing(pointcut = "logPointcut()", throwing = "e")
     public void logAfterThrowing(JoinPoint joinPoint, Throwable e) {
-        handlelogAfterThrowing();
+        handlelogAfterThrowing(joinPoint, e);
     }
 
-    private void handlelogAfterThrowing() {
+    private void handlelogAfterThrowing(JoinPoint joinPoint, Throwable e) {
+        LogDto logDto = setBaseInfo(joinPoint);
+        logDto.setErrorMsg(StringUtils.substring(e.getMessage(), 0, 2000));
+
+//        iLogService.saveLog(logDto);
     }
 
-    private void handleArointLog() {
+    private void handlelogAround(ProceedingJoinPoint joinPoint, Object result) {
+        LogDto logDto = setBaseInfo(joinPoint);
+        logDto.setResult(StringUtils.substring(JSON.toJSONString(result), 0, 2000));
+//        iLogService.saveLog(logDto);
     }
+
+    private LogDto setBaseInfo(JoinPoint joinPoint) {
+        HttpServletRequest servletRequest = ((ServletRequestAttributes) Objects.requireNonNull(RequestContextHolder.getRequestAttributes())).getRequest();
+        LogDto logDto = new LogDto();
+        logDto.setOperTime(new Timestamp(System.currentTimeMillis()));
+        logDto.setTime(System.currentTimeMillis() - TIME_THREADLOCAL.get());
+        TIME_THREADLOCAL.remove();
+        logDto.setRequestIp(IpUtils.getIpAddr(servletRequest));
+        logDto.setRequestUrl(StringUtils.substring(servletRequest.getRequestURI(), 0, 255));
+        logDto.setRequestMethod(servletRequest.getMethod());
+
+        //todo 设置用户名
+        logDto.setUsername("todo");
+
+        MethodSignature signature = (MethodSignature) joinPoint.getSignature();
+        Method method = signature.getMethod();
+        Log log = method.getAnnotation(Log.class);
+        logDto.setTitle(log.value().toString());
+        // 方法路径
+        String methodName = joinPoint.getTarget().getClass().getName() + "." + signature.getName() + "()";
+        logDto.setMethod(methodName);
+
+
+        StringBuilder params = new StringBuilder("{");
+        //参数值
+        List<Object> argValues = new ArrayList<>(Arrays.asList(joinPoint.getArgs()));
+        //参数名称
+        for (Object argValue : argValues) {
+            params.append(argValue).append(" ");
+        }
+
+        return logDto;
+    }
+
+
 }

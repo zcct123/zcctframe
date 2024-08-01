@@ -1,11 +1,17 @@
 package com.zcct.common.web.security.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.SecurityFilterChain;
 
 /**
  * @author zhaochong
@@ -13,27 +19,33 @@ import org.springframework.security.crypto.password.PasswordEncoder;
  * @date 2023/8/18 09:27
  * @description:
  */
-public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+@Configuration
+@EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true)
+public class WebSecurityConfig {
 
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
 
-    @Bean
-    @Override
-    public AuthenticationManager authenticationManagerBean() throws Exception {
-        return super.authenticationManagerBean();
-    }
+//    @Bean
+//    protected SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+//        http
+//                .csrf().disable()
+//                .exceptionHandling()
+//                .and()
+//                .sessionManagement()
+//                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+//                .and()
+//                .authorizeRequests((authorize) -> authorize
+//                        .antMatchers(HttpMethod.GET, "/api/v1/**").permitAll()
+//                        .antMatchers("/api/v1/auth/**").permitAll()
+//                        .antMatchers("/v2/api-docs/**").permitAll()
+//                        .antMatchers("/swagger-ui/**").permitAll()
+//                        .antMatchers("/swagger-resources/**").permitAll()
+//                        .antMatchers("/swagger-ui.html").permitAll()
+//                        .antMatchers("/webjars/**").permitAll()
+//                        .anyRequest()
+//                        .authenticated()
+//                );
+//        return http.build();
+//    }
 
-    /**
-     * 允许匿名访问所有接口 主要是 oauth 接口
-     * @param http
-     * @throws Exception
-     */
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
-                .antMatchers("/oauth/**").permitAll();
-    }
 }
