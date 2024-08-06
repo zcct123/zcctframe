@@ -1,42 +1,73 @@
+#
+#seata:
+#  application-id: ${spring.application.name}
+#  tx-service-group: default_tx_group
+#
+#  # Seata 的注册方式为 nacos
+#  registry:
+#    type: nacos
+#    nacos:
+#      namespace: zcctframe
+#      group: seata-group
+#      server-addr: 127.0.0.1:8848
+#      username: zcct
+#      password: zcct
+#  # Seata 的配置中心为 nacos
+#  config:
+#    type: nacos
+#    nacos:
+#      namespace: zcctframe
+#      group: seata-group
+#      server-addr: 127.0.0.1:8848
+#      username: zcct
+#      password: zcct
+#
+#
 #spring:
 #  datasource:
+#
 #    type: com.alibaba.druid.pool.DruidDataSource #引入druid数据源
 #    #数据源基本信息，也可放在druid下
-#    url: jdbc:mysql://127.0.0.1:3306/zcct-user?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+#    url: jdbc:mysql://127.0.0.1:3306/zcct-base?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
 #    username: root
 #    password: zclvct
 #    driver-class-name: com.mysql.cj.jdbc.Driver
 #    druid:
-#      #druid数据源专有配置
-#      initialSize: 5
-#      minIdle: 5
-#      maxActive: 20
-#      maxWait: 600000
-#      # 主要配置以上几个即可
-#      timeBetweenEvictionRunsMillis: 600000
-#      minEvictableIdleTimeMillis: 300000
-#      validationQuery: SELECT 1 FROM DUAL
+#      # 初始连接数
+#      initial-size: 50
+#      # 最小连接数
+#      min-idle: 50
+#      # 最大连接数
+#      max-active: 1000
+#      # 获取连接超时时间
+#      max-wait: 30000
+#      # 连接有效性检测时间
+#      time-between-eviction-runs-millis: 60000
+#      # 连接在池中最小生存的时间
+#      min-evictable-idle-time-millis: 300000
+#      # 连接在池中最大生存的时间
+#      max-evictable-idle-time-millis: 900000
 #      testWhileIdle: true
 #      testOnBorrow: false
 #      testOnReturn: false
-#      poolPreparedStatements: true
-#
-#      #配置监控统计拦截的filters：stat:监控统计、self4j(使用log4j的记得导入log4j的依赖）：日志记录、wall：防御sql注入 此处配置不能遗漏服务sql监控台不能监控sql
-#      filter:
-#        slf4j:
-#          enabled: true
-#        stat:
-#          enabled: true
-#          merge-sql: true
-#          slow-sql-millis: 5000
-#        wall:
-#          enabled: true
-#      #配置stat-view-servlet
+#      # 检测连接是否有效
+#      validation-query: select 1
+#      # 配置监控统计
+#      webStatFilter:
+#        enabled: true
 #      stat-view-servlet:
 #        enabled: true
-#        login-username: admin
-#        login-password: 123456
+#        url-pattern: /druid/*
 #        reset-enable: false
-#      #配置web-stat-filter
-#      web-stat-filter:
-#        enabled: true
+#        login-username: admin
+#        login-password: admin
+#      filter:
+#        stat:
+#          enabled: true
+#          # 记录慢SQL
+#          log-slow-sql: true
+#          slow-sql-millis: 1000
+#          merge-sql: true
+#        wall:
+#          config:
+#            multi-statement-allow: true
