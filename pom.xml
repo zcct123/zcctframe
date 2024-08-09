@@ -16,6 +16,7 @@
         <module>zcct-service</module>
         <module>mybatis-code-generater</module>
         <module>spring-security-demo</module>
+        <module>zcct-common/zcct-common-rocketmq</module>
     </modules>
 
     <packaging>pom</packaging>

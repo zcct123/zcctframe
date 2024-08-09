@@ -1,6 +1,6 @@
 # Tomcat
 server:
-  port: 8080
+  port: 80
 
 # Spring
 spring:
@@ -15,11 +15,11 @@ spring:
       discovery:
         server-addr: 127.0.0.1:8848
         namespace: zcctframe
-        group: zcct
+        group: gateway-${spring.profiles.active}
       config:
         server-addr: 127.0.0.1:8848
         file-extension: yml
         namespace: zcctframe
-        group: zcct
+        group: gateway-${spring.profiles.active}
         shared-configs:
           - application-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}
